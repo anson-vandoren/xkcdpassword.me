@@ -2,18 +2,57 @@ class PasswordGenerator {
   constructor() {
     this.optionRefs = {};
     this.bindUiRefs();
-    this.options = {
-      doUppercase: true,
-      separators: [""],
-      addRandomEndNumber: true,
-      saveOptions: false,
-    };
-
+    this.loadOptions();
     this.generateButton.addEventListener("click", (evt) =>
       this.generateNewPassword(evt)
     );
 
     this.loadWordListFromFile().then(() => this.generateNewPassword());
+  }
+
+  saveOptions() {
+    // if saveOptions is false, delete localStorage and return early
+    if (this.optionRefs.saveOptions.checked === false) {
+      window.localStorage.clear();
+      return;
+    }
+
+    // TODO: save the fact that save is enabled
+
+    // save options to localStorage
+    for (const [key, val] of Object.entries(this.options)) {
+      window.localStorage.setItem(key, val);
+    }
+  }
+
+  loadOptions() {
+    // if nothing is saved, use defaults:
+    this.options = {
+      doUppercase: true,
+      separators: [""],
+      addRandomEndNumber: true,
+    };
+
+    // try to load from localStorage
+    for (const [key, val] of Object.entries(this.options)) {
+      let valFromStorage = window.localStorage.getItem(key);
+      if (valFromStorage != null) {
+        if (typeof this.options[key] === "boolean") {
+          this.options[key] = valFromStorage === "true";
+        } else if (Array.isArray(this.options[key])) {
+          this.options[key] = valFromStorage.split(",");
+        }
+      }
+    }
+    // fix up separators
+    if (window.localStorage.getItem("separators").includes(",,")) {
+      this.options.separators.push(",");
+      this.options.separators = this.options.separators.filter(
+        (i) => i !== ""
+      );
+    }
+
+    // TODO: update UI elements based on options
   }
 
   bindUiRefs() {
@@ -31,7 +70,6 @@ class PasswordGenerator {
     this.copyButton = document.getElementById("pw-copy");
 
     // bind event listeners
-    //this.optionRefs.separators.addEventListener("input", (evt) => this.updateSeparators(evt));
     this.optionRefs.separators.oninput = (evt) => this.updateSeparators(evt);
   }
 
@@ -43,6 +81,9 @@ class PasswordGenerator {
     // update inputbox with actual separators used
     const displaySeps = this.options.separators.join("");
     this.optionRefs.separators.value = displaySeps;
+
+    // save options if appropriate
+    this.saveOptions();
   }
 
   async loadWordListFromFile() {
@@ -72,9 +113,7 @@ class PasswordGenerator {
       let sep = this.options.separators[sepNum];
       return acc + word + sep;
     }, "");
-    console.log(newPassword);
     newPassword = newPassword.slice(0, -1);
-    console.log(newPassword);
 
     // TODO: check if minLength is met and add another word if not
     // add in one extra length if addEndNum is true
