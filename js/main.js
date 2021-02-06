@@ -29,6 +29,20 @@ class PasswordGenerator {
     this.passwordBox = document.getElementById("pw-text");
     this.generateButton = document.getElementById("pw-generate");
     this.copyButton = document.getElementById("pw-copy");
+
+    // bind event listeners
+    //this.optionRefs.separators.addEventListener("input", (evt) => this.updateSeparators(evt));
+    this.optionRefs.separators.oninput = (evt) => this.updateSeparators(evt);
+  }
+
+  updateSeparators(evt) {
+    // remove duplicates and store as an array
+    const sepSet = new Set(evt.target.value);
+    this.options.separators = Array.from(sepSet);
+
+    // update inputbox with actual separators used
+    const displaySeps = this.options.separators.join("");
+    this.optionRefs.separators.value = displaySeps;
   }
 
   async loadWordListFromFile() {
@@ -53,9 +67,14 @@ class PasswordGenerator {
       word = this.optionRefs.doUppercase.checked
         ? word.charAt(0).toUpperCase() + word.slice(1)
         : word;
-      // TODO: add separator
-      return acc + word;
+
+      const sepNum = this.getRand(0, this.options.separators.length);
+      let sep = this.options.separators[sepNum];
+      return acc + word + sep;
     }, "");
+    console.log(newPassword);
+    newPassword = newPassword.slice(0, -1);
+    console.log(newPassword);
 
     // TODO: check if minLength is met and add another word if not
     // add in one extra length if addEndNum is true
