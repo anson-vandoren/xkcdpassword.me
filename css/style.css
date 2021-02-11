@@ -25,9 +25,8 @@ main {
   line-height: 1.4;
 }
 
-main.narrow-column {
-  /*TODO: does this do anything? */
-  max-width: 72ch;
+form {
+  width: 85%;
 }
 
 h2 {
@@ -101,5 +100,5 @@ button {
 
 #pw-separators {
   float: right;
-  width: auto;
+  width: calc(100% - 11ch);
 }
