@@ -45,11 +45,13 @@ class PasswordGenerator {
       }
     }
     // fix up separators
-    if (window.localStorage.getItem("separators").includes(",,")) {
-      this.options.separators.push(",");
-      this.options.separators = this.options.separators.filter(
-        (i) => i !== ""
-      );
+    if (window.localStorage.getItem("separators") != null) {
+      if (window.localStorage.getItem("separators").includes(",,")) {
+        this.options.separators.push(",");
+        this.options.separators = this.options.separators.filter(
+          (i) => i !== ""
+        );
+      }
     }
 
     // TODO: update UI elements based on options
