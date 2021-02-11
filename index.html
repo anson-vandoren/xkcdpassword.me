@@ -1,52 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>XKCD Password Generator</title>
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <h2>XKCD Password Generator</h2>
-    <form>
-      <input type="text" id="pw-text">
-      <button type="button" id="pw-generate">Generate</button>
-      <button type="button" id="pw-copy">Copy</button>
-      <br/>
-      <label for="pw-min-words">Min Words</label>
-      <select id="pw-min-words" name="pw-min-words">
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4" selected="selected">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10<option>
-      </select>
-      <label for="pw-min-length">Min Length</label>
-      <select id="pw-min-length" name="pw-min-length">
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20" selected="selected">20</option>
-        <option value="25">25</option>
-        <option value="30">30</option>
-        <option value="35">35</option>
-        <option value="40">40</option>
-      </select>
-      <br/>
-      <label for="pw-separators">Separators</label>
-      <input type="text" id="pw-separators">
-      <br/>
-      <label for="pw-uppercase">Make first letter uppercase</label>
-      <input type="checkbox" id="pw-uppercase" checked="checked">
-      <br/>
-      <label for="pw-end-num">Append random number</label>
-      <input type="checkbox" id="pw-end-num" checked="checked">
-      <br/>
-      <label for="pw-save-options">Save options locally?</label>
-      <input type="checkbox" id="pw-save-options">
-    </form>
+    <main>
+      <h2>XKCD Password Generator</h2>
+      <form>
+        <input type="text" id="pw-text" />
+        <br />
+        <div class="buttons">
+          <button type="button" id="pw-generate">Generate</button>
+          <button type="button" id="pw-copy">Copy</button>
+        </div>
+        <hr />
+        <label for="pw-min-words">Min Words</label>
+        <select id="pw-min-words" name="pw-min-words">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4" selected="selected">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option></option>
+        </select>
+        <label for="pw-min-length">Min Length</label>
+        <select id="pw-min-length" name="pw-min-length">
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20" selected="selected">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+          <option value="35">35</option>
+          <option value="40">40</option>
+        </select>
+        <br />
+        <div class="separator-line">
+          <label for="pw-separators">Separators</label>
+          <input type="text" id="pw-separators" />
+        </div>
+        <input type="checkbox" id="pw-uppercase" checked="checked" />
+        <label for="pw-uppercase">Make first letter uppercase</label>
+        <br />
+        <input type="checkbox" id="pw-end-num" checked="checked" />
+        <label for="pw-end-num">Append random number</label>
+        <br />
+        <input type="checkbox" id="pw-save-options" />
+        <label for="pw-save-options">Save options locally?</label>
+      </form>
 
-    <script type="text/javascript" src="js/main.js"></script>
+      <script type="text/javascript" src="js/main.js"></script>
+    </main>
+    <footer class="bottom-nav">
+      <a href="#">ABOUT</a>
+      <a href="https://github.com/anson-vandoren/xkcdpassword.me" target="_"
+        >GITHUB</a
+      >
+      <a href="https://ansonvandoren.com" target="_">ME</a>
+    </footer>
   </body>
 </html>
