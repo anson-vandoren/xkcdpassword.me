@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: xkcdpassword.me
+Token: 9f7f9832e9498c2a14c3d4f14666dfc89611d9cb422f05e0210d6cd74a28af14
