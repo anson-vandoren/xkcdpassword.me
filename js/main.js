@@ -115,7 +115,10 @@ class PasswordGenerator {
       let sep = this.options.separators[sepNum];
       return acc + word + sep;
     }, "");
-    newPassword = newPassword.slice(0, -1);
+    if (this.options.separators.length > 0) {
+      // If there are separators, remove the last separator
+      newPassword = newPassword.slice(0, -1);
+    }
 
     // TODO: check if minLength is met and add another word if not
     // add in one extra length if addEndNum is true
