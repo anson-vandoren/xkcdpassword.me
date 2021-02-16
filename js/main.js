@@ -115,7 +115,8 @@ class PasswordGenerator {
       let sep = this.options.separators[sepNum];
       return acc + word + sep;
     }, "");
-    if (this.options.separators.length > 0) {
+    console.log(this.options.separators);
+    if (this.options.separators.length > 0 && this.options.separators[0] !== "") {
       // If there are separators, remove the last separator
       newPassword = newPassword.slice(0, -1);
     }
